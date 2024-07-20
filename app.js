@@ -5,7 +5,7 @@ const ejs = require("ejs");
 const Listing = require("./models/listing.js");
 const MONGO_URL = "mongodb://127.0.0.1:27017/HavenQuest";
 const path = require("path");
-const methodOverride = require("method-override");
+const methodOverride = require("method-override"); 
 const ejsMate = require("ejs-mate");
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
