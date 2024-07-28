@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const review = require('./models/review');
+const listing=require('./models/listing');
 
 const listingSchema = Joi.object({
     listing: Joi.object({

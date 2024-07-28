@@ -7,6 +7,7 @@ const listingSchema = new Schema({
         required: true,
     },
     description: String,
+    //todos
     image: {
         type: String,
         default:
