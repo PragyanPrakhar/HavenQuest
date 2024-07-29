@@ -91,8 +91,9 @@ router.post(
 router.get(
     "/:id/edit",
     wrapAsync(async (req, res) => {
-        let { id } = req.params;
-        const listing = await Listing.findById(id);
+        // let { id } = req.params;
+        const listing = await Listing.findById(req.params.id);
+        console.log(listing);
         if (!listing) {
             req.flash("error", "Requested Listing does not exist");
             res.redirect("/listings");

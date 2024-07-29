@@ -11,7 +11,7 @@
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input
-                    name="title"
+                    name="listing[title]"
                     value="<%=listing.title%>"
                     type="text"
                     class="form-control"
@@ -25,32 +25,36 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea
-                    name="description"
+                    name="listing[description]"
                     type="text"
                     class="form-control"
                     required
                 >
                     <%=listing.description%></textarea
                 >
-                <div class="invalid-feedback">Please enter a short description</div>
+                <div class="invalid-feedback">
+                    Please enter a short description
+                </div>
             </div>
 
             <div class="mb-3">
                 <label for="image" class="form-label">Image Link</label>
                 <input
-                    name="image"
+                    name="listing[image]"
                     value="<%= listing.image%>"
                     type="text"
                     class="form-control"
                     required
                 />
-                <div class="invalid-feedback">Please Enter a valid link for the image</div>
+                <div class="invalid-feedback">
+                    Please Enter a valid link for the image
+                </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="price" class="form-label">Price</label>
                     <input
-                        name="price"
+                        name="listing[price]"
                         value="<%=listing.price%>"
                         type="number"
                         class="form-control"
@@ -62,20 +66,22 @@
                 <div class="mb-3 col-md-8">
                     <label for="country" class="form-label">Country</label>
                     <input
-                        name="country"
+                        name="listing[country]"
                         value="<%=listing.country%>"
                         type="text"
                         class="form-control"
                         required
                     />
-                    <div class="invalid-feedback">Country name should be valid</div>
+                    <div class="invalid-feedback">
+                        Country name should be valid
+                    </div>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="location" class="form-label">Location</label>
                 <input
-                    name="location"
+                    name="listing[location]"
                     value="<%=listing.location%>"
                     type="text"
                     class="form-control"
@@ -88,4 +94,3 @@
         </form>
     </div>
 </div>
-
