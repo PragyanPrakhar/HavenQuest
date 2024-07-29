@@ -8,10 +8,13 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport=require("passport");
+const LocalStrategy = require("passport-local");
+const User=require("./models/user.js");
 
-
-const reviews = require("./routes/review.js");
-const listings = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const listingRouter = require("./routes/listing.js");
+const userRouter=require("./routes/user.js");
 
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
@@ -33,7 +36,15 @@ const sessionOptions={
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use(passport.initialize());//Here we have initialized the passport.
+app.use(passport.session()); //we want user to sign up or sign in only one time in a session not on each and every request. 
+passport.use(new LocalStrategy(User.authenticate()));//authenticate() is a static method.
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
+//to store all the information related to the user into the session is serialize 
+// To remove all the information related to the user is known as deserialize.
 main()
     .then(() => {
         console.log("Connected to DB");
@@ -56,9 +67,20 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.use("/listings", listings);
+// app.get("/demouser",async(req,res)=>{
+//     let fakeUser=new User({
+//         email:"student@gmail.com",
+//         username:"students"
+//     })
+//     let registeredUser=await User.register(fakeUser,"helloworld");
+//     res.send(registeredUser);
+// })
 
-app.use("/listings/:id/reviews", reviews);
+app.use("/listings", listingRouter);
+
+app.use("/listings/:id/reviews", reviewRouter);
+
+app.use("/",userRouter);
 
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found !"));
