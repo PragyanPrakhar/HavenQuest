@@ -1,15 +1,14 @@
-body{
-/* background-color: pink;
+body {
+    /* background-color: pink;
  */
- font-family: "Plus Jakarta Sans", sans-serif !important;
- display: flex;
- flex-direction: column;
- min-height:100vh;
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.conatainer
-{
-    flex:1;
+.conatainer {
+    flex: 1;
 }
 
 .navbar {
@@ -60,25 +59,21 @@ body{
 }
 
 /* Cards */
-.listing-card
-{
+.listing-card {
     border: none !important;
     margin-bottom: 2rem;
-
-
 }
 
-.card-img-top
-{
+.card-img-top {
     border-radius: 1rem;
     width: 100% !important;
     object-fit: cover !important;
 }
 
-.card-body{
+.card-body {
     padding: 0 !important;
 }
-.card-text p{
+.card-text p {
     font-weight: 400 !important ;
 }
 .listing-link {
@@ -86,40 +81,42 @@ body{
 }
 
 /* Card Effect */
-.card-img-overlay
-{
+.card-img-overlay {
     opacity: 0;
 }
-.card-img-overlay:hover{
+.card-img-overlay:hover {
     opacity: 0.2;
     background-color: white;
 }
 
 /* New Page */
 .add-btn {
-    background-color:#fe424d !important;
-    border:none !important;
+    background-color: #fe424d !important;
+    border: none !important;
 }
 
 /* Edit Page */
 
 .edit-btn {
-    background-color:#fe424d !important;
-    border:none !important; 
+    background-color: #fe424d !important;
+    border: none !important;
 }
 
 /* Show Page */
 
-.show-img
-{
+.show-img {
     height: 30vh;
 }
-.btns
-{
+.btns {
     display: flex;
 }
-.show-card
-{
+.show-card {
     padding-left: 0;
     padding-right: 0;
+}
+
+/* Map */
+#map {
+    height: 400px;
+    width: 80vh;
 }
