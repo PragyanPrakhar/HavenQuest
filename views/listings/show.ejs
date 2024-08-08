@@ -76,7 +76,7 @@
         <div class="row">
         <p><b>All Reviews</b></p>
             <% for (review of listing.reviews){ %>
-                <div class="card col-5 ms-3 mb-3">
+                <!-- <div class="card col-5 ms-3 mb-3">
                     <div class="card-body">
                         <h5 class="card-title"><%= review.author.username %></h5>
                         <p class="starability-result card-text" data-rating="<%=review.rating%>"></p>
@@ -84,6 +84,21 @@
                     </div>
                     <form class="mb-3" method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
                         <button class="btn btn-sm btn-dark">Delete</button>
+                    </form>
+                </div> -->
+                <div class="card col-5 ms-3 mb-3">
+                    <div class="card-body">
+                    <h5 class="card-title">@<%= review.author.username %></h5>
+                    <p class="card-text"><%= review.comment%></p>
+                  
+                    <p class="starability-result card-text" 
+                        data-rating="<%=review.rating%>">
+                    </p>
+                    </div><br>
+        
+                    <form class="mb-3" method="POST"
+                          action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                      <button class="btn btn-dark">Delete</button>
                     </form>
                 </div>
                 </div>

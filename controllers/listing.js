@@ -1,4 +1,5 @@
 const Listing = require("../models/listing.js");
+const cloudinary = require("cloudinary").v2;
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
@@ -57,7 +58,7 @@ module.exports.createListing = async (req, res, next) => {
 //Edit Route
 module.exports.renderEditForm = async (req, res) => {
     // let {id} = req.params.id;
-    console.log("hello");
+    // console.log("hello");
     const listing = await Listing.findById(req.params.id);
     console.log(listing);
     if (!listing) {
@@ -72,24 +73,55 @@ module.exports.renderEditForm = async (req, res) => {
 
 //Update Route
 module.exports.updateListing = async (req, res) => {
-    let { id } = req.params;
-    let { title, description, image, price, country, location } = req.body;
-    let listing = await Listing.findByIdAndUpdate(id, {
-        title,
-        description,
-        image,
-        price,
-        country,
-        location,
-    });
-    if (typeof req.file !== "undefined") {
-        let url = req.file.path;
-        let filename = req.file.filename;
-        listing.image = { url, filename };
-        await listing.save();
+    // let { id } = req.params;
+    // let { title, description, image, price, country, location } = req.body.listing;
+    // let listing = await Listing.findByIdAndUpdate(id, {
+    //     title,
+    //     description,
+    //     image,
+    //     price,
+    //     country,
+    //     location,
+    // });
+    // if (typeof req.file !== "undefined") {
+    //     let url = req.file.path;
+    //     let filename = req.file.filename;
+    //     listing.image = { url, filename };
+    //     await listing.save();
+    // }
+    // req.flash("success", "Listing Updated !");
+    // res.redirect("/listings");
+    let {id} = req.params;
+    /* let response = await geocodingClient
+    .forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1,
+    })
+    .send(); */
+    let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing});
+    // listing.geometry = response.body.features[0].geometry;
+    // const newCoordinates = await geocode(req.body.listing.location);
+    let response = await geocodingClient
+    .forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1,
+    })
+    .send();
+    listing.geometry = response.body.features[0].geometry;
+    // listing.coordinates = newCoordinates;
+    await listing.save();
+
+
+
+
+    if(typeof req.file !== "undefined") {
+        let url = req.file.path; 
+        let filename = req.file.filename;  
+        listing.image = { url, filename }; 
+        await listing.save();    
     }
-    req.flash("success", "Listing Updated !");
-    res.redirect("/listings");
+    req.flash("success","Listing Updated!!");
+    res.redirect(`/listings/${id}`);
 };
 
 //Delete Route
