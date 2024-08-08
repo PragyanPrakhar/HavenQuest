@@ -110,10 +110,6 @@ module.exports.updateListing = async (req, res) => {
     listing.geometry = response.body.features[0].geometry;
     // listing.coordinates = newCoordinates;
     await listing.save();
-
-
-
-
     if(typeof req.file !== "undefined") {
         let url = req.file.path; 
         let filename = req.file.filename;  
